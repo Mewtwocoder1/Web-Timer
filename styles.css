@@ -1,0 +1,29 @@
+body {
+  margin: 40px auto;
+  max-width: 650px;
+  line-height: 1.6;
+  font-size: 18px;
+  background-color: rgb(20, 20, 20);
+  color: white;
+  padding: 0 10px;
+  font-family: sans-serif;
+}
+h1,
+h2,
+h3 {
+  line-height: 1.2;
+}
+
+#mainTimer, #subTimer {
+  font-family: monospace;
+}
+
+#mainTimer {
+  font-size: 2rem;
+}
+
+#headerImg {
+  width: 1em;
+  height: auto;
+  image-rendering: pixelated;
+}
