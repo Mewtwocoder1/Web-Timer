@@ -102,7 +102,10 @@ const startTimer = (millis, onComplete) => {
   timerInterval = window.setInterval(() => {
     const now = Date.now();
     if (targetDate - now < beepCount * 1000) {
-      audioFeedback && beep.play();
+      if (audioFeedback) {
+        beep.currentTime = 0; // Reset playback position
+        beep.play();
+      }
       beepCount--;
       if (mainTimerLabel.style.backgroundColor) {
         mainTimerLabel.style.backgroundColor = "";
