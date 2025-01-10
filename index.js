@@ -9,7 +9,7 @@ const subTimerLabel = document.getElementById("subTimer");
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
 const beep = new Audio();
-beep.src = "resources/sounds/beep.wav";
+beep.src = "./resources/sounds/beep.wav";
 beep.load();
 const audioContext = new AudioContext();
 audioContext.createGain().gain.value = 1;
