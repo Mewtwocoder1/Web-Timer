@@ -97,7 +97,6 @@ const resetTimer = () => {
 
 const startTimer = (millis, onComplete) => {
   audioContext.resume();
-  audioFeedback && beep.play();
   let beepCount = 3;
   const targetDate = Date.now() + millis;
   timerInterval = window.setInterval(() => {
