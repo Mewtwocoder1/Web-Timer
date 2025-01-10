@@ -1,45 +1,56 @@
-<h1><img id="headerImg" /> Roar of Timer v1.1</h1>
-
-<div id="mainTimer"></div>
-<div id="subTimer"></div>
-<button id="startButton">Start</button>
-<button id="resetButton">Reset</button>
-
-<h2>Settings</h2>
-<table>
-  <tr>
-    <td>
-      <label for="targetFrame"><abbr title="The desired frame number">Target frame</abbr></label>
-    </td>
-    <td>
-      <input id="targetFrame" type="number" />
-    </td>
-  </tr>
-  <tr>
-    <td>
-      <label for="preTimer"><abbr title="The number of milliseconds to count down for the game reset">Pre-timer (ms)</abbr></label>
-    </td>
-    <td>
-      <input id="preTimer" type="number" value="5000" />
-    </td>
-  </tr>
-  <tr>
-    <td><label for="frameHit"><abbr title="A frame you've successfully hit, used to calibrate the timer">Frame hit</abbr></label></td>
-    <td><input id="frameHit" type="number" disabled /></td>
-  </tr>
-  <tr>
-    <td>
-      <label for="audioFeedback"><abbr title="Play audio when nearing the end of the timer">Audio feedback</abbr></label>
-    </td>
-    <td>
-      <input id="audioFeedback" type="checkbox" checked></input>
-    </td>
-  </tr><tr>
-    <td>
-      <label for="visualFeedback"><abbr title="Flash when nearing the end of the timer">Visual feedback</abbr></label>
-    </td>
-    <td>
-      <input id="visualFeedback" type="checkbox" checked></input>
-    </td>
-  </tr>
-</table>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RNG Web Timer</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <script src="index.js"></script>
+    <h1><img id="headerImg" /> Roar of Timer v1.1</h1>
+    <div id="mainTimer"></div>
+    <div id="subTimer"></div>
+    <button id="startButton">Start</button>
+    <button id="resetButton">Reset</button>
+    <h2>Settings</h2>
+    <table>
+      <tr>
+        <td>
+          <label for="targetFrame"><abbr title="The desired frame number">Target frame</abbr></label>
+        </td>
+        <td>
+          <input id="targetFrame" type="number" />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="preTimer"><abbr title="The number of milliseconds to count down for the game reset">Pre-timer (ms)</abbr></label>
+        </td>
+        <td>
+          <input id="preTimer" type="number" value="5000" />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="frameHit"><abbr title="A frame you've successfully hit, used to calibrate the timer">Frame hit</abbr></label></td>
+        <td><input id="frameHit" type="number" disabled /></td>
+      </tr>
+      <tr>
+        <td>
+          <label for="audioFeedback"><abbr title="Play audio when nearing the end of the timer">Audio feedback</abbr></label>
+        </td>
+        <td>
+          <input id="audioFeedback" type="checkbox" checked></input>
+        </td>
+      </tr><tr>
+        <td>
+          <label for="visualFeedback"><abbr title="Flash when nearing the end of the timer">Visual feedback</abbr></label>
+        </td>
+        <td>
+          <input id="visualFeedback" type="checkbox" checked></input>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
