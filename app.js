@@ -8,12 +8,32 @@ const mainTimerLabel = document.getElementById("mainTimer");
 const subTimerLabel = document.getElementById("subTimer");
 const startButton = document.getElementById("startButton");
 const resetButton = document.getElementById("resetButton");
-const beep = new Audio();
-beep.src = "./resources/sounds/beep.wav";
-beep.load();
-const audioContext = new AudioContext();
-audioContext.createGain().gain.value = 1;
-audioContext.createMediaElementSource(beep).connect(audioContext.destination);
+
+const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Create AudioContext
+
+// Path to your local beep sound
+const beepSoundPath = "resources/sounds/beep.wav"; // Adjust the path based on your folder structure
+
+// Function to load the beep sound
+let beepBuffer = null;
+fetch(beepSoundPath)
+  .then((res) => res.arrayBuffer()) // Fetch the sound file as an array buffer
+  .then((arrayBuffer) => audioContext.decodeAudioData(arrayBuffer)) // Decode the array buffer to audio data
+  .then((buffer) => {
+    beepBuffer = buffer; // Store the decoded audio buffer for later playback
+  })
+  .catch((err) => console.error("Audio load error:", err));
+
+// Function to play the beep sound
+const playBeep = () => {
+  if (beepBuffer) {
+    const source = audioContext.createBufferSource();
+    source.buffer = beepBuffer;
+    source.connect(audioContext.destination); // Connect the source to the destination (speakers)
+    source.start(); // Play the sound
+  }
+};
+
 let preTimerMillis = +preTimerInput.value;
 let targetMillis = 0;
 let frameHitMillis = 0;
@@ -37,10 +57,10 @@ const getAdjustedTargetMillis = (target, hit) => {
   if (hit <= 0) {
     return target;
   }
-  
+
   const offset = target - hit;
   return target + offset;
-}
+};
 
 onInputSubmit(targetFrameInput, () => {
   const targetFrame = +targetFrameInput.value;
@@ -49,7 +69,7 @@ onInputSubmit(targetFrameInput, () => {
     startButton.disabled = false;
     frameHitInput.disabled = false;
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
-    subTimer.textContent = formatTime(adjustedTargetMillis    );
+    subTimer.textContent = formatTime(adjustedTargetMillis);
   }
 });
 
@@ -81,13 +101,13 @@ const formatTime = (millis) => {
   const seconds = Math.floor(millis / 1000);
   millis -= seconds*1000;
   return String(minutes).padStart(3, "0") + ":" + String(seconds).padStart(2, "0") + "." + String(millis).padStart(3, "0");
-}
+};
 
 const resetTimer = () => {
   window.clearInterval(timerInterval);
   mainTimer.textContent = formatTime(preTimerMillis);
   mainTimer.style.backgroundColor = "";
-  subTimer.textContent = formatTime(adjustedTargetMillis)
+  subTimer.textContent = formatTime(adjustedTargetMillis);
   startButton.disabled = false;
   resetButton.disabled = true;
   targetFrameInput.disabled = false;
@@ -96,31 +116,30 @@ const resetTimer = () => {
 };
 
 const startTimer = (millis, onComplete) => {
-  audioContext.resume();
+  audioContext.resume(); // Make sure AudioContext is resumed
   let beepCount = 3;
   const targetDate = Date.now() + millis;
+  let initialBeepSkipped = false;
+
   timerInterval = window.setInterval(() => {
     const now = Date.now();
-    if (targetDate - now < beepCount * 1000) {
-      if (audioFeedback) {
-        beep.currentTime = 0; // Reset playback position
-        beep.play();
-      }
+
+    if (initialBeepSkipped && targetDate - now < beepCount * 1000) {
+      playBeep(); // Play beep sound
       beepCount--;
-      if (mainTimerLabel.style.backgroundColor) {
-        mainTimerLabel.style.backgroundColor = "";
-      } else {
-        visualFeedback && (mainTimerLabel.style.backgroundColor = "aqua");
-      }
     }
-    
+
     if (now > targetDate) {
       window.clearInterval(timerInterval);
       onComplete();
       return;
     }
-    
+
     mainTimer.textContent = formatTime(targetDate - now);
+
+    if (!initialBeepSkipped) {
+      initialBeepSkipped = true;
+    }
   }, 1);
 };
 
@@ -130,7 +149,7 @@ startButton.onclick = () => {
   targetFrameInput.disabled = true;
   preTimerInput.disabled = true;
   frameHitInput.disabled = true;
-  
+
   startTimer(preTimerMillis, () => {
     subTimer.textContent = formatTime(0);
     startTimer(adjustedTargetMillis, resetTimer);
