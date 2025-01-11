@@ -3,7 +3,7 @@ body {
   max-width: 650px;
   line-height: 1.6;
   font-size: 18px;
-  background-image: "./resources/themes/images/background.png";
+  background-image: url("./resources/themes/default/images/background.png");
   color: white;
   padding: 0 10px;
   font-family: sans-serif;
