@@ -117,14 +117,13 @@ const resetTimer = () => {
 
 const startTimer = (millis, onComplete) => {
   audioContext.resume(); // Make sure AudioContext is resumed
-  let beepCount = 3;
+  let beepCount = 5;
   const targetDate = Date.now() + millis;
-  let initialBeepSkipped = false;
 
   timerInterval = window.setInterval(() => {
     const now = Date.now();
 
-    if (initialBeepSkipped && targetDate - now < beepCount * 1000) {
+    if (targetDate - now < beepCount * 500) {
       playBeep(); // Play beep sound
       beepCount--;
     }
@@ -136,10 +135,6 @@ const startTimer = (millis, onComplete) => {
     }
 
     mainTimer.textContent = formatTime(targetDate - now);
-
-    if (!initialBeepSkipped) {
-      initialBeepSkipped = true;
-    }
   }, 1);
 };
 
