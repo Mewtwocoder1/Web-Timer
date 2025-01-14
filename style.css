@@ -13,6 +13,7 @@ h3 {
 
 .back-img {
   position: absolute;
+  height: auto;
   width: 100vw;
   object-fit: cover;
   object-position: 95% 50%;
