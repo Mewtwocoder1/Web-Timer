@@ -4,25 +4,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>RNG Web Timer</title>
+    <title>Pyro Timer</title>
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <h1><img id="headerImg" /> Roar of Timer v1.1</h1>
-    <div id="mainTimer"></div>
-    <div id="subTimer"></div>
-    <button id="startButton">Start</button>
-    <button id="resetButton">Reset</button>
-    <label for="targetFrame"><abbr title="The desired frame number">Target frame</abbr></label>
-    <input id="targetFrame" type="number" />
-    <label for="preTimer"><abbr title="The number of milliseconds to count down for the game reset">Pre-timer (ms)</abbr></label>
-    <input id="preTimer" type="number" value="5000" />
-    <label for="frameHit"><abbr title="A frame you've successfully hit, used to calibrate the timer">Frame hit</abbr></label>
-    <input id="frameHit" type="number" disabled />
-    <label for="audioFeedback"><abbr title="Play audio when nearing the end of the timer">Audio feedback</abbr></label>
-    <input id="audioFeedback" type="checkbox" checked></input>
-    <label for="visualFeedback"><abbr title="Flash when nearing the end of the timer">Visual feedback</abbr></label>
-    <input id="visualFeedback" type="checkbox" checked></input>
+    <img class="back-img" src="resources/themes/default/images/background.png" alt="" draggable="false">
+    <div class="timerWrapper">
+      <div id="mainTimer">5:000</div>
+      <div id="subTimer">5:000</div>
+    </div>
+    <div class="timer-config">
+      <label for="calibration">Calibration</label>
+      <input id="calibration" type="number" value="0">
+      <label for="preTimer">Pre-Timer</label>
+      <input id="preTimer" type="number" value="5000">
+      <label for="targetFrame">Target Frame</label>
+      <input id="targetFrame" type="number" value="1000">
+      <label for="frameHit">Frame Hit</label>
+      <input id="frameHit" type="number" disabled />
+      <button id="updateButton">Update</button>
+      <button id="startButton">Start</button>
+    </div>
     <script src="./app.js"></script>
   </body>
 </html>
