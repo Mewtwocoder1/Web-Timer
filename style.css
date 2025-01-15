@@ -1,25 +1,20 @@
 body {
+  height: 100vh;
   margin: 0;
   line-height: 1.6;
   font-size: 18px;
   color: white;
   font-family: sans-serif;
+  background-image: url(https://i.redd.it/9j7eycwmq9q11.png);
+  background-size: cover;
+  background-position: 97% 100%;
+  background-repeat: no-repeat;
 }
+
 h1,
 h2,
 h3 {
   line-height: 1.2;
-}
-
-.back-img {
-  position: absolute;
-  height: 99%;
-  width: 100vw;
-  object-fit: cover;
-  object-position: 95% 50%;
-  inset: 0;
-  z-index: -1;
-  pointer-events: none;
 }
 
 .timerWrapper {
