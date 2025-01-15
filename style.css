@@ -8,7 +8,7 @@ body {
   background-image: url(resources/themes/default/images/background.png);
   background-size: cover;
   background-position: 97% 100%;
-  background-repeat: no-repeat;
+  overflow: hidden;
 }
 
 h1,
