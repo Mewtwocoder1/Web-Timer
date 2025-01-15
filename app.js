@@ -2,12 +2,9 @@ const headerImg = document.getElementById("headerImg");
 const targetFrameInput = document.getElementById("targetFrame");
 const preTimerInput = document.getElementById("preTimer");
 const frameHitInput = document.getElementById("frameHit");
-const audioFeedbackInput = document.getElementById("audioFeedback");
-const visualFeedbackInput = document.getElementById("visualFeedback");
 const mainTimerLabel = document.getElementById("mainTimer");
 const subTimerLabel = document.getElementById("subTimer");
 const startButton = document.getElementById("startButton");
-const resetButton = document.getElementById("resetButton");
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Create AudioContext
 
@@ -39,8 +36,6 @@ let targetMillis = 0;
 let frameHitMillis = 0;
 let adjustedTargetMillis = 0;
 let timerInterval = null;
-let audioFeedback = true;
-let visualFeedback = true;
 
 const onInputSubmit = (input, func) => {
   input.onblur = func;
@@ -87,14 +82,6 @@ onInputSubmit(frameHitInput, () => {
   }
 });
 
-onInputSubmit(audioFeedbackInput, () => {
-   audioFeedback = audioFeedbackInput.checked;
-});
-
-onInputSubmit(visualFeedbackInput, () => {
-  visualFeedback = visualFeedbackInput.checked;
-});
-
 const formatTime = (millis) => {
   const minutes = Math.floor(millis / (1000*60));
   millis -= minutes*1000*60;
@@ -109,7 +96,6 @@ const resetTimer = () => {
   mainTimer.style.backgroundColor = "";
   subTimer.textContent = formatTime(adjustedTargetMillis);
   startButton.disabled = false;
-  resetButton.disabled = true;
   targetFrameInput.disabled = false;
   preTimerInput.disabled = false;
   frameHitInput.disabled = false;
@@ -140,7 +126,6 @@ const startTimer = (millis, onComplete) => {
 
 startButton.onclick = () => {
   startButton.disabled = true;
-  resetButton.disabled = false;
   targetFrameInput.disabled = true;
   preTimerInput.disabled = true;
   frameHitInput.disabled = true;
@@ -151,12 +136,6 @@ startButton.onclick = () => {
   });
 };
 
-resetButton.onclick = resetTimer;
-
-fetch("https://pokeapi.co/api/v2/pokemon/dialga/")
-  .then((res) => res.json())
-  .then((json) => headerImg.src = json.sprites.versions["generation-vii"].icons.front_default);
 mainTimer.textContent = formatTime(preTimerMillis);
 subTimer.textContent = formatTime(0);
 startButton.disabled = true;
-resetButton.disabled = true;
