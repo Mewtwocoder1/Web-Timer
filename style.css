@@ -5,7 +5,7 @@ body {
   font-size: 18px;
   color: white;
   font-family: sans-serif;
-  background-image: url(https://i.redd.it/9j7eycwmq9q11.png);
+  background-image: url(resources/themes/default/images/background.png);
   background-size: cover;
   background-position: 97% 100%;
   background-repeat: no-repeat;
