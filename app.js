@@ -64,7 +64,7 @@ onInputSubmit(targetFrameInput, () => {
     startButton.disabled = false;
     frameHitInput.disabled = false;
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
-    calibration.textContent = adjustedTargetMillis
+    calibration.value = adjustedTargetMillis
     subTimer.textContent = formatTime(adjustedTargetMillis);
   }
 });
@@ -79,7 +79,7 @@ onInputSubmit(frameHitInput, () => {
   if (frameHit > 0) {
     frameHitMillis = framesToMillis(frameHit);
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
-    calibration.textContent = adjustedTargetMillis
+    calibration.value = adjustedTargetMillis
     subTimer.textContent = formatTime(adjustedTargetMillis);
   }
 });
