@@ -1,6 +1,6 @@
-const headerImg = document.getElementById("headerImg");
 const targetFrameInput = document.getElementById("targetFrame");
 const preTimerInput = document.getElementById("preTimer");
+const calibrationInput = document.getElementById("calibration");
 const frameHitInput = document.getElementById("frameHit");
 const mainTimerLabel = document.getElementById("mainTimer");
 const subTimerLabel = document.getElementById("subTimer");
@@ -64,6 +64,7 @@ onInputSubmit(targetFrameInput, () => {
     startButton.disabled = false;
     frameHitInput.disabled = false;
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
+    calibration.textContent = adjustedTargetMillis
     subTimer.textContent = formatTime(adjustedTargetMillis);
   }
 });
@@ -78,6 +79,7 @@ onInputSubmit(frameHitInput, () => {
   if (frameHit > 0) {
     frameHitMillis = framesToMillis(frameHit);
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
+    calibration.textContent = adjustedTargetMillis
     subTimer.textContent = formatTime(adjustedTargetMillis);
   }
 });
