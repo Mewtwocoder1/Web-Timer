@@ -79,6 +79,7 @@ onInputSubmit(frameHitInput, () => {
   if (frameHit > 0) {
     frameHitMillis = framesToMillis(frameHit);
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
+    frameHit.value = "0"
     subTimer.textContent = formatTime(adjustedTargetMillis);
   }
 });
