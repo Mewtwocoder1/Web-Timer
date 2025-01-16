@@ -54,6 +54,7 @@ const getAdjustedTargetMillis = (target, hit) => {
   }
 
   const offset = target - hit;
+  calibration.value = offset;
   return target + offset;
 };
 
@@ -64,7 +65,6 @@ onInputSubmit(targetFrameInput, () => {
     startButton.disabled = false;
     frameHitInput.disabled = false;
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
-    calibration.value = adjustedTargetMillis
     subTimer.textContent = formatTime(adjustedTargetMillis);
   }
 });
@@ -79,7 +79,6 @@ onInputSubmit(frameHitInput, () => {
   if (frameHit > 0) {
     frameHitMillis = framesToMillis(frameHit);
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
-    calibration.value = adjustedTargetMillis
     subTimer.textContent = formatTime(adjustedTargetMillis);
   }
 });
