@@ -46,7 +46,8 @@ const onInputSubmit = (input, func) => {
   });
 };
 
-const framesToMillis = (f) => Math.round(f * 1000 / 60);
+const framesToMillis = (f) => Math.round(f * 1000 / 60); //Converts frames for ms
+const millisToFrames = (ms) => Math.round(ms / 1000 * 60);
 
 const getAdjustedTargetMillis = (target, hit) => {
   if (hit <= 0) {
@@ -54,7 +55,7 @@ const getAdjustedTargetMillis = (target, hit) => {
   }
 
   const offset = target - hit;
-  calibration.value = offset;
+  calibration.value = millisToFrames(offset);
   return target + offset;
 };
 
@@ -65,7 +66,6 @@ onInputSubmit(targetFrameInput, () => {
     startButton.disabled = false;
     frameHitInput.disabled = false;
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
-    frameHit.value = ""
     subTimer.textContent = formatTime(adjustedTargetMillis);
   }
 });
@@ -84,7 +84,7 @@ onInputSubmit(frameHitInput, () => {
   }
 });
 
-const formatTime = (millis) => {
+const formatTime = (millis) => { //Converts ms to m/s/ms
   const minutes = Math.floor(millis / (1000*60));
   millis -= minutes*1000*60;
   const seconds = Math.floor(millis / 1000);
