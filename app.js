@@ -55,7 +55,7 @@ const getAdjustedTargetMillis = (target, hit) => {
   }
 
   const offset = target - hit;
-  calibration.value = millisToFrames(offset);
+  calibration.value = offset;
   return target + offset;
 };
 
