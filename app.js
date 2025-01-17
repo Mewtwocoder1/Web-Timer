@@ -5,7 +5,7 @@ const frameHitInput = document.getElementById("frameHit");
 const mainTimerLabel = document.getElementById("mainTimer");
 const subTimerLabel = document.getElementById("subTimer");
 const startButton = document.getElementById("startButton");
-const consoleFps = 59.7275
+const consoleFps = 59.7275;
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Create AudioContext
 
