@@ -88,7 +88,7 @@ onInputSubmit(frameHitInput, () => {
 const formatTime = (millis) => { //Converts ms to s/ms
   const seconds = Math.floor(millis / 1000);
   millis -= seconds*1000;
-  return String(seconds).padStart(2, "0") + "." + String(millis).padStart(3, "0");
+  return String(seconds) ":" + String(millis).padStart(3, "0");
 };
 
 const resetTimer = () => {
