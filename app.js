@@ -5,6 +5,7 @@ const frameHitInput = document.getElementById("frameHit");
 const mainTimerLabel = document.getElementById("mainTimer");
 const subTimerLabel = document.getElementById("subTimer");
 const startButton = document.getElementById("startButton");
+const consoleFps = 59.7275
 
 const audioContext = new (window.AudioContext || window.webkitAudioContext)(); // Create AudioContext
 
@@ -46,8 +47,8 @@ const onInputSubmit = (input, func) => {
   });
 };
 
-const framesToMillis = (f) => Math.round(f * 1000 / 60); //Converts frames for ms
-const millisToFrames = (ms) => Math.round(ms / 1000 * 60);
+const framesToMillis = (f) => Math.round(f * 1000 / consoleFps); //Converts frames for ms
+const millisToFrames = (ms) => Math.round(ms / 1000 * consoleFps);
 
 const getAdjustedTargetMillis = (target, hit) => {
   if (hit <= 0) {
