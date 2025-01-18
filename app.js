@@ -47,8 +47,8 @@ const onInputSubmit = (input, func) => {
   });
 };
 
-const framesToMillis = (f) => Math.round(f * 1000 / consoleFps); //Converts frames for ms
-const millisToFrames = (ms) => Math.round(ms / 1000 * consoleFps);
+const framesToMillis = (f) => Math.floor(f * 1000 / consoleFps); //Converts frames for ms
+const millisToFrames = (ms) => Math.floor(ms / 1000 * consoleFps);
 
 const getAdjustedTargetMillis = (target, hit) => {
   if (hit <= 0) {
