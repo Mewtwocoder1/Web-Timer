@@ -38,15 +38,6 @@ let frameHitMillis = 0;
 let adjustedTargetMillis = 0;
 let timerInterval = null;
 
-const onInputSubmit = (input, func) => {
-  input.onblur = func;
-  input.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-      func();
-    }
-  });
-};
-
 const framesToMillis = (f) => Math.floor(f * 1000 / consoleFps); //Converts frames for ms
 const millisToFrames = (ms) => Math.floor(ms / 1000 * consoleFps);
 
