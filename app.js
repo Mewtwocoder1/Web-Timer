@@ -112,6 +112,7 @@ const startTimer = (millis, onComplete) => {
 
     if (targetDate - now < beepCount * 500) {
       playBeep(); // Play beep sound
+      mainTimer.style.backgroundColor = "red"; // Visual Feedback
       beepCount--;
     }
 
@@ -137,5 +138,3 @@ startButton.onclick = () => {
     startTimer(adjustedTargetMillis, resetTimer);
   });
 };
-
-mainTimer.textContent = formatTime(preTimerMillis);
