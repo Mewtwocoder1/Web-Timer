@@ -136,4 +136,4 @@ startButton.onclick = () => {
 };
 
 mainTimer.textContent = formatTime(preTimerMillis);
-subTimer.textContent = formatTime(0);
+subTimer.textContent = formatTime(adjustedTargetMillis);
