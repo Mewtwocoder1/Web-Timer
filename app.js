@@ -40,10 +40,11 @@ let timerInterval = null;
 
 const onInputSubmit = (input, func) => {
   input.onblur = func;
+  window.addEventListener("load", (e) => {
+    func();
+  });
   input.addEventListener("keyup", (e) => {
-    if (e.key === "Enter") {
-      func();
-    }
+    func();
   });
 };
 
@@ -64,8 +65,6 @@ onInputSubmit(targetFrameInput, () => {
   const targetFrame = +targetFrameInput.value;
   targetMillis = framesToMillis(targetFrame);
   if (targetMillis > 0) {
-    startButton.disabled = false;
-    frameHitInput.disabled = false;
     adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
     subTimer.textContent = formatTime(adjustedTargetMillis);
   }
@@ -100,6 +99,7 @@ const resetTimer = () => {
   targetFrameInput.disabled = false;
   preTimerInput.disabled = false;
   frameHitInput.disabled = false;
+  calibrationInput.disabled = false;
 };
 
 const startTimer = (millis, onComplete) => {
@@ -130,6 +130,7 @@ startButton.onclick = () => {
   targetFrameInput.disabled = true;
   preTimerInput.disabled = true;
   frameHitInput.disabled = true;
+  calibrationInput.disabled = true;
 
   startTimer(preTimerMillis, () => {
     subTimer.textContent = formatTime(0);
@@ -138,5 +139,3 @@ startButton.onclick = () => {
 };
 
 mainTimer.textContent = formatTime(preTimerMillis);
-subTimer.textContent = formatTime(0);
-startButton.disabled = true;
