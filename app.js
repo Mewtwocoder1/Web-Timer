@@ -34,7 +34,7 @@ const playBeep = () => {
     mainTimer.style.backgroundColor = "red";
     setTimeout(() => {
       mainTimer.style.backgroundColor = ""; // Reset the background color
-    }, 200); // Adjust the time (200ms) for how long the red flash should last
+    }, 50); // Adjust the time (200ms) for how long the red flash should last
   }
 };
 
