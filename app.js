@@ -106,12 +106,12 @@ const resetTimer = () => {
   window.clearInterval(timerInterval);
   mainTimer.textContent = formatTime(preTimerMillis);
   subTimer.textContent = formatTime(adjustedTargetMillis);
-  startButton.textContent = "Start";
   updateButton.disabled = false;
   targetFrameInput.disabled = false;
   preTimerInput.disabled = false;
   frameHitInput.disabled = false;
   calibrationInput.disabled = false;
+  startButton.textContent = "Start"; // Update button text
   isTimerRunning = false; // Update state
 };
 
@@ -153,12 +153,13 @@ startButton.onclick = () => {
     frameHitInput.disabled = true;
     calibrationInput.disabled = true;
 
+    startButton.textContent = "Stop"; // Update button text
+    isTimerRunning = true; // Update state
+
     startTimer(preTimerMillis, () => {
       subTimer.textContent = formatTime(0);
       startTimer(adjustedTargetMillis, () => {
         resetTimer();
-        startButton.textContent = "Stop";
-        isTimerRunning = false; //Update state
       });
     });
   }
