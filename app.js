@@ -131,15 +131,34 @@ const startTimer = (millis, onComplete) => {
   }, 1);
 };
 
-startButton.onclick = () => {
-  startButton.disabled = true;
-  targetFrameInput.disabled = true;
-  preTimerInput.disabled = true;
-  frameHitInput.disabled = true;
-  calibrationInput.disabled = true;
+let isTimerRunning = false; // Tracks whether the timer is running
 
-  startTimer(preTimerMillis, () => {
-    subTimer.textContent = formatTime(0);
-    startTimer(adjustedTargetMillis, resetTimer);
-  });
+startButton.onclick = () => {
+  if (isTimerRunning) {
+    // Stop the timer
+    resetTimer();
+    startButton.textContent = "Start"; // Update button text
+    isTimerRunning = false; // Update state
+  } else {
+    // Start the timer
+    startButton.disabled = true; // Temporarily disable to avoid double clicks
+    targetFrameInput.disabled = true;
+    preTimerInput.disabled = true;
+    frameHitInput.disabled = true;
+    calibrationInput.disabled = true;
+
+    startButton.textContent = "Stop"; // Update button text
+    isTimerRunning = true; // Update state
+
+    startTimer(preTimerMillis, () => {
+      subTimer.textContent = formatTime(0);
+      startTimer(adjustedTargetMillis, () => {
+        resetTimer();
+        startButton.textContent = "Start"; // Reset button text
+        isTimerRunning = false; // Update state
+      });
+    });
+
+    startButton.disabled = false; // Re-enable button after starting
+  }
 };
