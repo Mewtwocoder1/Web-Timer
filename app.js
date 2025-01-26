@@ -82,14 +82,19 @@ onInputSubmit(preTimerInput, () => {
   mainTimer.textContent = formatTime(preTimerMillis);
 });
 
-onInputSubmit(frameHitInput, () => {
-  const frameHit = +frameHitInput.value;
-  if (frameHit > 0) {
-    frameHitMillis = framesToMillis(frameHit);
-    adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
-    subTimer.textContent = formatTime(adjustedTargetMillis);
+const updateFrameHit = (event) => {
+  if (event.type === "click" || (event.type === "keydown" && event.key === "Enter")) {
+    const frameHit = +frameHitInput.value;
+    if (frameHit > 0) {
+      frameHitMillis = framesToMillis(frameHit);
+      adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
+      subTimer.textContent = formatTime(adjustedTargetMillis);
+    }
   }
-});
+};
+
+updateButton.addEventListener("click", updateFrameHit);
+frameHitInput.addEventListener("keydown", updateFrameHit);
 
 const formatTime = (millis) => { //Converts ms to s/ms
   const seconds = Math.floor(millis / 1000);
