@@ -35,7 +35,7 @@ const playBeep = () => {
     mainTimer.style.backgroundColor = "red";
     setTimeout(() => {
       mainTimer.style.backgroundColor = ""; // Reset the background color
-    }, 50); // Adjust the time (200ms) for how long the red flash should last
+    }, 50);
   }
 };
 
@@ -46,11 +46,10 @@ let adjustedTargetMillis = 0;
 let timerInterval = null;
 
 const onInputSubmit = (input, func) => {
-  input.onblur = func;
   window.addEventListener("load", (e) => {
     func();
   });
-  input.addEventListener("keyup", (e) => {
+  input.addEventListener("keydown", (e) => {
     func();
   });
 };
@@ -89,6 +88,7 @@ const updateFrameHit = (event) => {
       frameHitMillis = framesToMillis(frameHit);
       adjustedTargetMillis = getAdjustedTargetMillis(targetMillis, frameHitMillis);
       subTimer.textContent = formatTime(adjustedTargetMillis);
+      frameHitInput.value = ""; //Clears the input after calibration
     }
   }
 };
