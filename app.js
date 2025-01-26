@@ -22,13 +22,19 @@ fetch(beepSoundPath)
   })
   .catch((err) => console.error("Audio load error:", err));
 
-// Function to play the beep sound
+// Function to play the beep sound and make the main timer flash red
 const playBeep = () => {
   if (beepBuffer) {
     const source = audioContext.createBufferSource();
     source.buffer = beepBuffer;
     source.connect(audioContext.destination); // Connect the source to the destination (speakers)
     source.start(); // Play the sound
+
+    // Flash the main timer red
+    mainTimerLabel.style.backgroundColor = "red";
+    setTimeout(() => {
+      mainTimerLabel.style.backgroundColor = ""; // Reset the background color
+    }, 200); // Adjust the time (200ms) for how long the red flash should last
   }
 };
 
@@ -93,7 +99,6 @@ const formatTime = (millis) => { //Converts ms to s/ms
 const resetTimer = () => {
   window.clearInterval(timerInterval);
   mainTimer.textContent = formatTime(preTimerMillis);
-  mainTimer.style.backgroundColor = "";
   subTimer.textContent = formatTime(adjustedTargetMillis);
   startButton.disabled = false;
   targetFrameInput.disabled = false;
